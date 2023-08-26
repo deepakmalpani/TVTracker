@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class SearchMovieController {
+public class MovieDetailsController{
     
     @RequestMapping("/")
     public @ResponseBody String display(){
