@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import java.util.Optional;
 
 import com.tvtracker.tvtrackerbackend.repositories.MovieRepository;
@@ -20,13 +23,29 @@ public class MovieDetailsController{
         this.movieRepository = movieRepository;
     }
 
-    @GetMapping("/{imdbId}")
-    public ResponseEntity<MovieModel> findByimdbId(@PathVariable String imdbId){
-        Optional<MovieModel> movieModelOptional = Optional.of(movieRepository.findByimdbId(imdbId));
-        if (movieModelOptional.isPresent()){
-            return ResponseEntity.ok(movieModelOptional.get());
-        } else{
-            return ResponseEntity.notFound().build();
-        }
+    // @GetMapping("/{id}")
+    // public ResponseEntity<MovieModel> findByimdbId(@PathVariable String imdbId){
+    //     Optional<MovieModel> movieModelOptional = Optional.of(movieRepository.findById(imdbId));
+    //     if (movieModelOptional.isPresent()){
+    //         return ResponseEntity.ok(movieModelOptional.get());
+    //     } else{
+    //         return ResponseEntity.notFound().build();
+    //     }
+    // }
+
+    // @GetMapping("/{id}")
+    // public MovieModel findById(@PathVariable String id){
+    //     return this.movieRepository.findById(id);
+    // }
+
+    @GetMapping("/")
+    public Iterable<MovieModel> findAllMovies(){
+        return this.movieRepository.findAll();
+    }
+
+    @PostMapping("/")
+    public MovieModel addOneMovie(@RequestBody MovieModel movie){
+        System.out.println(movie);
+        return this.movieRepository.save(movie);
     }
 }
