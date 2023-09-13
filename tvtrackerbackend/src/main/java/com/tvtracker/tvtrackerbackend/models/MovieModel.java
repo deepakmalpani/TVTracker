@@ -1,15 +1,11 @@
 package com.tvtracker.tvtrackerbackend.models;
-import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.Column;
-
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name="movie")
@@ -17,41 +13,40 @@ public class MovieModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Getter 
+    @JsonSetter("id")
     private Integer id;
 
-    // @Column(name = "imdb_id")
-    @Getter @Setter
-    private String imdbId;
-
-    @Getter @Setter
+    @JsonSetter("Title")
     private String Title;
 
-    @Getter @Setter
+    @JsonSetter("Year")
     private String Year;
 
-    @Getter @Setter
+    @JsonSetter("Rated")
     private String Rated;
 
-    @Getter @Setter
+    @JsonSetter("Genre")
     private String Genre;
 
-    @Getter @Setter
+    @JsonSetter("Director")
     private String Director;
 
-    @Getter @Setter
+    @JsonSetter("Actors")
     private String Actors;
 
-    @Getter @Setter
+    @JsonSetter("Plot")
     private String Plot;
 
-    @Getter @Setter
+    @JsonSetter("Type")
     private String Type;
+
+    @JsonSetter("imdbID")
+    private String imdbId;
 
     MovieModel(){}
 
-    public MovieModel(String imdbId, String Title, String Year, String Rated, String Genre, String Director, String Actors, String Plot, String Type){
-        this.imdbId = imdbId;
+    public MovieModel( String Title, String Year, String Rated, String Genre, String Director, String Actors, String Plot, String Type, String imdbId){
+        
         this.Title = Title;
         this.Year = Year;
         this.Rated = Rated;
@@ -60,6 +55,7 @@ public class MovieModel {
         this.Actors = Actors;
         this.Plot = Plot;
         this.Type = Type;
+        this.imdbId = imdbId;
     }
 
     @Override
@@ -73,6 +69,86 @@ public class MovieModel {
                ", imdbId='" + this.Genre + '\'' +
                ", imdbId='" + this.Director + '\'' +
                '}';
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getImdbId() {
+        return imdbId;
+    }
+
+    public void setImdbId(String imdbId) {
+        this.imdbId = imdbId;
+    }
+
+    public String getTitle() {
+        return Title;
+    }
+
+    public void setTitle(String title) {
+        Title = title;
+    }
+
+    public String getYear() {
+        return Year;
+    }
+
+    public void setYear(String year) {
+        Year = year;
+    }
+
+    public String getRated() {
+        return Rated;
+    }
+
+    public void setRated(String rated) {
+        Rated = rated;
+    }
+
+    public String getGenre() {
+        return Genre;
+    }
+
+    public void setGenre(String genre) {
+        Genre = genre;
+    }
+
+    public String getDirector() {
+        return Director;
+    }
+
+    public void setDirector(String director) {
+        Director = director;
+    }
+
+    public String getActors() {
+        return Actors;
+    }
+
+    public void setActors(String actors) {
+        Actors = actors;
+    }
+
+    public String getPlot() {
+        return Plot;
+    }
+
+    public void setPlot(String plot) {
+        Plot = plot;
+    }
+
+    public String getType() {
+        return Type;
+    }
+
+    public void setType(String type) {
+        Type = type;
     }
 
 }
