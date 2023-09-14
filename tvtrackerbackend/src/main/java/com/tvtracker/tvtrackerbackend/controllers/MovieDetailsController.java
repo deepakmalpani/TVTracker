@@ -23,23 +23,9 @@ public class MovieDetailsController{
         this.movieRepository = movieRepository;
     }
 
-    // @GetMapping("/{id}")
-    // public ResponseEntity<MovieModel> findByimdbId(@PathVariable String imdbId){
-    //     Optional<MovieModel> movieModelOptional = Optional.of(movieRepository.findById(imdbId));
-    //     if (movieModelOptional.isPresent()){
-    //         return ResponseEntity.ok(movieModelOptional.get());
-    //     } else{
-    //         return ResponseEntity.notFound().build();
-    //     }
-    // }
-
-    // @GetMapping("/{id}")
-    // public MovieModel findById(@PathVariable String id){
-    //     return this.movieRepository.findById(id);
-    // }
-
     @GetMapping("/")
     public Iterable<MovieModel> findAllMovies(){
+
         return this.movieRepository.findAll();
     }
 
@@ -47,5 +33,15 @@ public class MovieDetailsController{
     public MovieModel addOneMovie(@RequestBody MovieModel movie){
         System.out.println(movie);
         return this.movieRepository.save(movie);
+    }
+
+    @GetMapping("/{imdbId}")
+    public ResponseEntity<MovieModel> findByImdbId(@PathVariable String imdbId){
+        Optional<MovieModel> movieOptional = Optional.ofNullable(this.movieRepository.findByImdbId(imdbId));
+        if (movieOptional.isPresent()){
+            return ResponseEntity.ok(movieOptional.get());
+        } else{
+            return ResponseEntity.notFound().build();
+        }
     }
 }
