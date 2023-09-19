@@ -2,12 +2,14 @@ package com.tvtracker.tvtrackerbackend.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.net.URI;
 import java.util.Optional;
 
 import com.tvtracker.tvtrackerbackend.repositories.MovieRepository;
@@ -30,9 +32,13 @@ public class MovieDetailsController{
     }
 
     @PostMapping("/")
-    public MovieModel addOneMovie(@RequestBody MovieModel movie){
-        System.out.println(movie);
-        return this.movieRepository.save(movie);
+    public ResponseEntity<Void> addOneMovie(@RequestBody MovieModel newMovieRequest, UriComponentsBuilder ucb){
+        MovieModel savedMovie = movieRepository.save(newMovieRequest);
+        URI locationOfNewMovie = ucb
+                .path("/moviedetails/{imdbId}")
+                .buildAndExpand(savedMovie.getImdbId())
+                .toUri();
+        return ResponseEntity.created(locationOfNewMovie).build();
     }
 
     @GetMapping("/{imdbId}")
