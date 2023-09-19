@@ -1,11 +1,12 @@
 {
-    "Title": "title1",
-    "Year": "2000",
-    "Rated": "rated1",
-    "Genre": "genre1",
-    "Director": "director1",
-    "Actors": "actor1",
-    "Plot": "plot1",
-    "imdbID": "xyz",
-    "Type": "type1"
+    "id":null,
+    "imdbId":"xyz",
+    "type":"type1",
+    "year":"2000",
+    "rated":"rated1",
+    "title":"title1",
+    "director":"director1",
+    "actors":"actor1",
+    "genre":"genre1",
+    "plot":"plot1"
 }

@@ -28,16 +28,14 @@ public class MovieJsonTest {
     @BeforeEach
     void setUp(){
         movies = Arrays.array(
-            new MovieModel("xyz","title1","2000","rated1","genre1","director1","actor1","plot1","type1" )
+            new MovieModel("title1","2000","rated1","genre1","director1","actor1","plot1","type1","xyz" )
+            
         );
     }
 
     @Test
     public void MovieSerializationTest() throws IOException{
         MovieModel movie = movies[0];
-        System.out.println(movie);
-        System.out.println(json.write(movie));
-        System.out.println(movie.getImdbId());
-        assertThat(json.write(movie)).isStrictlyEqualToJson("single.json");
+        assertThat(json.write(movie)).isEqualToJson("single.json");
     }
 }
