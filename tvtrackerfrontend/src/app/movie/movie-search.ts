@@ -1,7 +1,13 @@
 export interface IMovieSearch {
-    title: string;
-    year: number;
+    Title: string;
+    Year: number;
     imdbID: string;
-    type: string;
-    poster: string;
+    Type: string;
+    Poster: string;
+}
+
+export interface ISearchResult {
+    Search: IMovieSearch[],
+    totalResults: string,
+    Response: string
 }

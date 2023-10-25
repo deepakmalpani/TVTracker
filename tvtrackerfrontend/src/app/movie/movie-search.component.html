@@ -2,3 +2,10 @@
 
 <input type="text" [(ngModel)] = 'movieSearch'/>
 <button>Search</button>
+<div>
+    <ul *ngFor="let movie of movies">
+        <li> {{movie.Title}}</li>
+        <li> {{movie.Year}}</li>
+        <li> {{movie.imdbID}}</li>
+    </ul>
+</div>
