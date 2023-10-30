@@ -13,18 +13,10 @@ export class MovieSearchService {
 
   constructor(private http: HttpClient) { }
 
-  // getSearchedMovies() : Observable<IMovieSearch[]> {
-  //   // return this.http.get<IMovieSearch[]>(this.searchURI).pipe(
-  //   //     tap(data => console.log('All: ' + JSON.stringify(data))),
-  //   //     catchError(this.handleError)
-  //   // );
-  //   return this.getSearchMovieJson().pipe(
-  //     map((search_results : ISearchResult) => search_results.search)
-  //   )
-  // }
-
   getSearchMovieJson() : Observable<ISearchResult>{
-    return this.http.get<ISearchResult>(this.searchURI);
+    return this.http.get<ISearchResult>(this.searchURI).pipe(
+      catchError(this.handleError)
+    );
   }
 
   private handleError(err : HttpErrorResponse){
